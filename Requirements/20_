@@ -1,0 +1,114 @@
+we're going to work with a vibe coding tool. let's start by specifying the requirements for the first phase. be detailed and have a comprehensive scope.
+
+>>
+### Requirements for Phase 1: Core Foundation and MVP of the Single-Pane-of-Glass (SPOG) Portal Using Vibe Coding
+
+#### Overview and Context
+In this phase, we will leverage a vibe coding tool—defined as an AI-driven development approach where natural language prompts guide code generation, evaluation, and iteration without deep manual coding—to accelerate the building of the SPOG portal's core foundation. Vibe coding emphasizes describing the "vibe" or intent (e.g., "create a unified search interface that feels intuitive like Google but tailored for data catalogs") to let AI tools (e.g., GitHub Copilot, Replit AI, or Figma Make integrations) generate, test, and refine code. This aligns with industry trends from 2025, as seen in tools from Google Cloud, IBM, and GitHub, where developers focus on high-level orchestration rather than low-level implementation.
+
+Phase 1 focuses on establishing the MVP: basic integrations for catalogs and data sources, unified discovery, and simple data product creation. The scope is comprehensive yet scoped to deliver a functional prototype within 4-6 weeks, emphasizing modularity for future phases. Key principles:
+- **Vibe Coding Integration**: Use AI prompts for 70-80% of code generation; human review for security/governance.
+- **Success Metrics**: Functional MVP with 80% test coverage; vibe coding efficiency tracked via prompt iterations and code quality scores.
+- **Assumptions**: Access to vibe coding tools like GitHub Copilot or equivalent; team trained on prompt engineering.
+- **Exclusions**: Advanced BI embeddings, real-time syncing, and full governance—deferred to Phase 2.
+
+This phase builds on prior requirements and specs, prioritizing extensibility, security, and user feedback loops.
+
+#### Scope Definition
+- **In-Scope**:
+  - Integrate 3-5 key catalogs (e.g., Unity, Horizon, Polaris) and data sources.
+  - Enable basic discovery, derived dataset creation, and data product definition.
+  - Implement vibe coding workflows for rapid prototyping.
+  - Basic UI/UX for self-service.
+  - Governance stubs (e.g., metadata tagging).
+- **Out-of-Scope**:
+  - Full BI tool integrations (e.g., PowerBI embedding).
+  - Scalability optimizations (e.g., handling 1,000+ users).
+  - AI-enhanced features (e.g., ML recommendations).
+- **Dependencies**: Access to vibe coding APIs; sample data from catalogs/sources; stakeholder availability for reviews.
+- **Risks and Mitigations**: AI-generated code hallucinations—mitigate with automated tests; tool lock-in—use open standards.
+
+#### Functional Requirements
+Organized by key aspects, with vibe coding prompts examples for implementation guidance.
+
+1. **Catalog Integration**
+   - **Supported Catalogs**: Unity Catalog (Databricks) for namespace-based governance; Horizon Catalog (Snowflake) for compliance features; Polaris Catalog for Iceberg metadata; plus 1-2 others (e.g., Microsoft Purview) for extensibility.
+   - **Features**:
+     - Metadata synchronization: Pull descriptions, tags, schemas, and ownership; support scheduled pulls (e.g., every 15 minutes).
+     - Unified metadata store: Centralize in a lightweight DB (e.g., PostgreSQL) with schema for cross-catalog querying.
+     - Basic lineage: Track simple dependencies (e.g., table A derives from source B).
+   - **User Capabilities**: Discover items via keyword search; view metadata previews; tag items manually.
+   - **Vibe Coding Prompts**:
+     - "Generate a Python module that connects to Unity Catalog API, authenticates via OAuth, and syncs metadata to a local JSON store. Include error handling for rate limits."
+     - "Create a GraphQL resolver that merges metadata from Horizon and Polaris, resolving conflicts by prioritizing user-defined tags."
+
+2. **Data Sources and Platforms Integration**
+   - **Supported Sources**: Databases (e.g., PostgreSQL, Snowflake); Data Lakes (e.g., S3, Delta Lake); APIs (e.g., RESTful endpoints).
+   - **Features**:
+     - Connectivity: Use connectors for ingestion; support query federation (e.g., run SQL across sources).
+     - Data Profiling: Auto-generate stats (e.g., row count, null percentages) on ingestion.
+     - Derived Datasets: Allow simple transformations (e.g., joins, filters) via a low-code interface.
+   - **User Capabilities**: Browse sources; create derived datasets from 2+ sources; preview samples (up to 100 rows).
+   - **Vibe Coding Prompts**:
+     - "Build a Node.js service that uses JDBC to query PostgreSQL and Snowflake, combines results into a Pandas-like dataframe, and exposes via REST API."
+     - "Prompt an AI to generate SQL transformation code for deriving a dataset, then integrate it into a workflow orchestrator like Airflow-lite."
+
+3. **Data Product Definition and Discovery**
+   - **Features**:
+     - Product Creation: Define via forms (e.g., name, description, SLA fields like freshness); link to datasets/catalog items.
+     - Discovery: Centralized search with filters (e.g., by domain, quality score); basic subscriptions (e.g., email alerts on updates).
+     - Versioning: Simple semantic versioning (e.g., v1.0) with change logs.
+   - **User Capabilities**: Create/subscribe to products; discover via relevance-ranked results; view product lineage.
+   - **Vibe Coding Prompts**:
+     - "Design a React component for data product forms, auto-generating fields from metadata schemas, and persist to a backend API."
+     - "Use AI to create a search index with Elasticsearch, indexing products by tags and descriptions, with fuzzy matching."
+
+4. **Unified Portal Interface**
+   - **Features**:
+     - Dashboard: Home page with search bar, recent assets, and quick links.
+     - Navigation: Modular sidebar (e.g., Catalogs > Sources > Products).
+     - Collaboration Stubs: Commenting on assets; basic sharing links.
+   - **User Capabilities**: Self-service workflows (e.g., discover > derive > productize in one session).
+   - **Vibe Coding Prompts**:
+     - "Generate a full-stack MVP using Next.js: frontend for UI, backend for API, with authentication via JWT."
+     - "Prompt for a responsive design that embeds metadata views, ensuring mobile compatibility."
+
+#### Non-Functional Requirements
+- **Performance**: Page loads <2 seconds; search queries <500ms; handle 50 concurrent users.
+- **Security**:
+  - Authentication: Integrate SSO (e.g., OAuth2); role-based access (e.g., viewer vs. editor).
+  - Data Protection: Encrypt metadata in transit/rest; basic auditing of actions.
+  - Vibe Coding Safety: Scan AI-generated code for vulnerabilities (e.g., using Snyk stubs).
+- **Usability**:
+  - Accessibility: WCAG 2.1 compliance (e.g., alt text, keyboard nav).
+  - Onboarding: Tooltips and guided tours for vibe-coded features.
+- **Reliability**:
+  - Error Handling: Graceful failures with user-friendly messages.
+  - Testing: 80% unit/integration coverage; include vibe coding evaluation loops (e.g., run generated code in sandboxes).
+- **Scalability and Extensibility**:
+  - Modular Architecture: Microservices for integrations; API-first for future expansions.
+  - Vibe Coding Framework: Define prompt templates for consistency; track iterations in a log.
+
+#### Vibe Coding Workflow Requirements
+To ensure effective use of vibe coding:
+- **Tool Selection**: Primary: GitHub Copilot or equivalent; Secondary: Replit AI for quick prototypes.
+- **Prompt Engineering Guidelines**:
+  - Be specific: Include context (e.g., "In the context of a data portal integrating Unity Catalog...").
+  - Iterative: Start broad, refine (e.g., "Improve this code for performance by adding caching.").
+  - Evaluation: Use execution results and tools (e.g., linters) to assess; aim for <5 iterations per feature.
+- **Human Oversight**: 100% review of security-critical code; document AI contributions for audits.
+- **Integration**: Embed vibe coding in CI/CD (e.g., auto-generate tests from prompts).
+
+#### Deliverables and Milestones
+- **Week 1-2**: Setup vibe coding environment; initial prompts for catalog integrations; alpha prototype.
+- **Week 3-4**: Data sources and product features; UI integration; internal testing.
+- **Week 5-6**: User feedback sessions; refinements; MVP deployment to staging.
+- **Artifacts**: Updated specs doc; prompt library; code repo with AI annotations; test reports; demo video.
+
+#### Team Roles and Responsibilities
+- **Business Analysis**: Refine use cases for vibe prompts; validate MVP alignment.
+- **Design**: Create wireframes to guide UI prompts.
+- **Development**: Execute vibe coding; review/iterate generated code.
+- **Deployment**: Setup sandboxes for safe AI executions; monitor MVP.
+
+This comprehensive Phase 1 sets a strong foundation, leveraging vibe coding for speed while maintaining quality. Next steps: Tool setup and kickoff workshop.

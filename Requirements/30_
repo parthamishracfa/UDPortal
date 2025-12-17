@@ -1,0 +1,132 @@
+Detailed Phase 2 requirements
+
+>>
+### Requirements for Phase 2: Advanced Integrations, Governance, and Scalability of the Single-Pane-of-Glass (SPOG) Portal Using Vibe Coding
+
+#### Overview and Context
+Building on Phase 1's MVP—which established core catalog integrations (e.g., Unity, Horizon, Polaris), data source connectivity, basic data product creation, and a unified discovery interface—Phase 2 advances the portal toward a production-ready system. This phase incorporates advanced features like BI tool integrations, comprehensive governance, real-time capabilities, and performance optimizations. We continue leveraging vibe coding tools for rapid development, with an increased focus on AI-assisted refinements (e.g., generating governance workflows or optimization code via iterative prompts).
+
+Phase 2 aims for a beta release within 6-8 weeks post-Phase 1, emphasizing user adoption through enhanced self-service, collaboration, and analytics. Key principles:
+- **Vibe Coding Evolution**: Shift to 80-90% AI generation for complex features; incorporate prompt chaining (e.g., generate base code, then optimize for scalability).
+- **Success Metrics**: 90% test coverage; vibe coding efficiency improved by 20% (measured by fewer iterations); beta user satisfaction >75% via surveys.
+- **Assumptions**: Phase 1 MVP is stable; access to advanced vibe coding features (e.g., integration with LLMs like Grok 4 for code suggestions); pilot user group for testing.
+- **Exclusions**: Full production deployment (deferred to Phase 3); custom AI models for recommendations.
+
+This phase aligns with industry benchmarks from 2025 reports (e.g., Gartner on unified data platforms), ensuring the portal supports enterprise-scale operations while maintaining modularity.
+
+#### Scope Definition
+- **In-Scope**:
+  - Integrate BI and reporting tools (e.g., PowerBI, Tableau).
+  - Enhance governance with automated policies, lineage, and quality controls.
+  - Add real-time syncing, collaboration, and analytics dashboards.
+  - Optimize for scalability and multi-user environments.
+  - Expand vibe coding to include automated testing and deployment scripts.
+- **Out-of-Scope**:
+  - Custom plugin development for niche catalogs.
+  - On-premises deployments.
+  - Advanced ML features (e.g., predictive analytics on data products).
+- **Dependencies**: Phase 1 code base; access to BI tool APIs/SDKs; regulatory guidelines for governance (e.g., GDPR templates).
+- **Risks and Mitigations**: Integration complexities—mitigate with phased rollouts; vibe coding inaccuracies—enforce dual human-AI reviews; user resistance—include change management in beta testing.
+
+#### Functional Requirements
+Organized by evolving the Phase 1 aspects, with new additions for depth. Each includes vibe coding prompt examples.
+
+1. **Enhanced Catalog Integration**
+   - **Expansions**: Add bi-directional syncing (e.g., push metadata edits back to Unity/Horizon/Polaris); support additional catalogs (e.g., Collibra, Atlan); integrate AI-enriched metadata (e.g., auto-tagging based on content).
+   - **Features**:
+     - Real-Time Updates: WebSocket-based notifications for catalog changes.
+     - Advanced Lineage: Multi-hop dependency graphs with impact analysis (e.g., "What breaks if this table changes?").
+     - Governance Policies: Apply cross-catalog rules (e.g., auto-classify PII data).
+   - **User Capabilities**: Edit and propagate metadata across catalogs; visualize lineage in interactive graphs; set custom alerts for specific assets.
+   - **Vibe Coding Prompts**:
+     - "Generate a WebSocket handler in Python that listens for Unity Catalog events and updates a central metadata store in real-time, including retry logic for failures."
+     - "Create a Neo4j-based lineage graph module; prompt AI to auto-generate Cypher queries for impact analysis from sample datasets."
+
+2. **Advanced Data Sources and Platforms Integration**
+   - **Expansions**: Support streaming sources (e.g., Kafka); multi-cloud federation (e.g., query across AWS S3 and Azure Data Lake); automated data cleansing.
+   - **Features**:
+     - Real-Time Ingestion: Handle live data feeds with low-latency processing.
+     - Derived Datasets Enhancements: Support complex transformations (e.g., ML-based feature engineering stubs); version control for derivations.
+     - Data Quality Engine: Automated scoring with thresholds (e.g., flag datasets <85% completeness).
+   - **User Capabilities**: Create streaming-derived datasets; apply quality gates during ingestion; collaborate on derivations via shared sessions.
+   - **Vibe Coding Prompts**:
+     - "Build a Kafka consumer in Node.js that ingests streams, applies filters, and derives real-time datasets for storage in Delta Lake."
+     - "Prompt for a quality scoring algorithm using Pandas; integrate with a workflow to alert on low scores, including visualization of metrics."
+
+3. **Data Product Management and Subscription**
+   - **Expansions**: Add SLA monitoring (e.g., track freshness in real-time); marketplace-like discovery with ratings/reviews; subscription tiers (e.g., basic vs. premium access).
+   - **Features**:
+     - Product Lifecycle: Approval workflows for publishing; deprecation notifications.
+     - Discovery Enhancements: Semantic search with embeddings (e.g., vector-based similarity).
+     - Collaboration: Integrated commenting, version diffs, and co-editing.
+   - **User Capabilities**: Rate and review products; subscribe with custom SLAs; track usage analytics per product.
+   - **Vibe Coding Prompts**:
+     - "Generate a workflow engine using BPMN-like logic for data product approvals, with email integrations for notifications."
+     - "Use AI to create a vector search index with Pinecone or similar; embed product metadata for semantic queries."
+
+4. **BI and Reporting Integration**
+   - **Supported Tools**: PowerBI (embed reports with interactive filters); Tableau (support for extracts and live connections); Looker (LookML model integration); QuickSight (ML-powered insights).
+   - **Features**:
+     - Embedding: Seamless inline display with single-sign-on.
+     - Cross-Tool Federation: Combine visuals (e.g., PowerBI chart + Tableau map in one portal page).
+     - Report Creation: Low-code builder to generate reports from data products.
+   - **User Capabilities**: Discover and view reports from any tool; create hybrid dashboards; export/share reports securely.
+   - **Vibe Coding Prompts**:
+     - "Create an embedding service using iframes for PowerBI and Tableau; handle authentication proxying and resize events."
+     - "Prompt for a federated dashboard composer in React, allowing drag-and-drop of visuals from multiple BI tools."
+
+5. **New: Governance and Compliance Module**
+   - **Features**:
+     - Policy Engine: Define/enforce rules (e.g., access by role, data masking).
+     - Auditing: Full action logs with search/export; compliance reports (e.g., GDPR audits).
+     - Quality Assurance: Automated anomaly detection (e.g., drift in datasets).
+   - **User Capabilities**: Configure policies via UI; generate compliance dashboards; remediate issues collaboratively.
+   - **Vibe Coding Prompts**:
+     - "Generate a policy enforcement middleware in Python that intercepts API calls and applies RBAC with row-level security."
+     - "Build an auditing system using Elasticsearch; AI-generate Kibana-like dashboards for compliance metrics."
+
+6. **New: Analytics and Collaboration Hub**
+   - **Features**:
+     - Usage Analytics: Track portal metrics (e.g., most viewed assets, search trends).
+     - Collaboration Tools: Real-time chat, task assignments, and integration with external apps (e.g., Slack).
+     - Custom Dashboards: User-configurable views combining portal elements.
+   - **User Capabilities**: Analyze adoption KPIs; collaborate on assets in threads; personalize home pages.
+   - **Vibe Coding Prompts**:
+     - "Create a metrics collector using Prometheus; prompt for Grafana integrations to visualize usage data."
+     - "Generate a Socket.io-based chat module embedded in asset views, with threading and mentions."
+
+#### Non-Functional Requirements
+- **Performance**: Handle 200+ concurrent users; real-time features <1s latency; optimize queries with caching (e.g., Redis).
+- **Security**:
+  - Advanced Auth: Multi-factor; encryption for all data; vulnerability scanning in vibe-generated code.
+  - Compliance: Built-in support for standards like CCPA; automated PII detection.
+- **Usability**:
+  - Enhanced UX: AI-driven suggestions (e.g., "Similar to this dataset..."); multilingual support stubs.
+  - Accessibility: Full WCAG 2.2 compliance; voice navigation prototypes.
+- **Reliability**:
+  - Fault Tolerance: Circuit breakers for integrations; automated backups.
+  - Testing: End-to-end tests; vibe coding includes auto-generated unit tests.
+- **Scalability and Extensibility**:
+  - Cloud-Native: Kubernetes orchestration; auto-scaling.
+  - Vibe Coding Advancements: Template libraries for common patterns; integration with CI/CD for auto-deploys.
+
+#### Vibe Coding Workflow Requirements
+- **Tool Enhancements**: Integrate with advanced LLMs (e.g., Grok 4 APIs) for context-aware prompts; use chaining (e.g., "From this Phase 1 code, add real-time features").
+- **Prompt Engineering**: Standardize templates (e.g., "Optimize for scalability: [code snippet]"); track efficacy with logs.
+- **Oversight**: Mandatory security reviews; A/B testing of AI variants.
+- **Integration**: Embed in agile sprints; use for refactoring Phase 1 code.
+
+#### Deliverables and Milestones
+- **Week 1-2**: Governance and BI integration prototypes; vibe prompt library updates.
+- **Week 3-4**: Real-time and collaboration features; internal beta testing.
+- **Week 5-6**: Optimizations and analytics; user feedback iterations.
+- **Week 7-8**: Full beta release; documentation and handover prep.
+- **Artifacts**: Updated architecture diagrams; vibe coding logs; beta test reports; refined specs for Phase 3.
+
+#### Team Roles and Responsibilities
+- **Business Analysis**: Prioritize features based on pilot feedback; update use cases.
+- **Design**: Evolve UI for new modules (e.g., governance dashboards).
+- **Development**: Lead vibe coding for advanced features; ensure Phase 1 compatibility.
+- **Deployment**: Scale infra for beta; monitor performance.
+
+This Phase 2 solidifies the portal as a robust, enterprise tool, setting the stage for full rollout. Next: Beta kickoff and refinement workshops.
